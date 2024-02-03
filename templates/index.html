@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Choose Excel File{% endblock %}
+
+{% block body %}
+
+<br>  
+<form action="/start_print"method='POST' enctype="multipart/form-data">  
+    <div class="container">
+        <div >
+            <!-- <label for="formFileLg" class="form-label">Choose Excel File</label> -->
+            <input class="form-control form-control-lg" id="formFileLg" name="file" type="file">
+        </div>
+        
+        <br><br>
+    
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Enter Start Sheet Number</label>
+          <input type="number" name="start_sheet_number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Enter End Sheet Number</label>
+          <input type="number" name="end_sheet_number" class="form-control" id="exampleInputPassword1">
+        </div>
+   </div> 
+
+    <br><br>
+    <center><button type="submit" class="btn btn-success btn-lg">Start Print</button></center>
+
+</form>
+{% endblock %}
