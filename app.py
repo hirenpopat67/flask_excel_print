@@ -6,6 +6,7 @@ import pythoncom
 import traceback
 import win32com
 import shutil
+import pywintypes
 
 
 app = Flask(__name__)
@@ -74,14 +75,18 @@ def start_print():
             custome_name = sheet.Range('D6').Value
             date = sheet.Range('G7').Value
 
-
-            # Format the date cell as a string (displaying only the date)
+            # Check the type of 'date' and convert it if necessary
             if isinstance(date, datetime):
-                date_formatted = date.strftime('%d-%m-%Y')
-                date_formatted = f"({date_formatted})"
-            else:
-                date_formatted = None
+                dt_obj = date
+            elif isinstance(date, str):
+                try:
+                    # Attempt to parse the date string in the 'd-m-y' format
+                    dt_obj = datetime.strptime(date, '%d-%m-%Y')
+                except ValueError:
+                    date_formatted = date
 
+            # Convert the datetime object to the desired format
+            date_formatted = dt_obj.strftime('%d-%m-%Y')
 
             print_area = 'B3:H36'
 
@@ -95,7 +100,7 @@ def start_print():
                 os.mkdir('C:\\Users\\Admin\\Desktop\\Chetna_Plastic_Bills')
 
             # Print the worksheet to PDF
-            pdf_file = f'C:\\Users\Admin\\Desktop\\Chetna_Plastic_Bills\\{custome_name}{date_formatted}.pdf'
+            pdf_file = f'C:\\Users\Admin\\Desktop\\Chetna_Plastic_Bills\\{custome_name} ({date_formatted}).pdf'
             sheet.ExportAsFixedFormat(0, pdf_file)
 
             print(f"PDF saved as '{pdf_file}'")
