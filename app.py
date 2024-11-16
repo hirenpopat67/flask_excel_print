@@ -78,15 +78,16 @@ def start_print():
             # Check the type of 'date' and convert it if necessary
             if isinstance(date, datetime):
                 dt_obj = date
+                # Convert the datetime object to the desired format
+                date_formatted = dt_obj.strftime('%d-%m-%Y')
             elif isinstance(date, str):
                 try:
                     # Attempt to parse the date string in the 'd-m-y' format
-                    dt_obj = datetime.strptime(date, '%d-%m-%Y')
+                    date_formatted = datetime.strptime(date, '%d-%m-%Y')
                 except ValueError:
-                    date_formatted = date
+                    date_formatted = date.replace('/','-')
 
-            # Convert the datetime object to the desired format
-            date_formatted = dt_obj.strftime('%d-%m-%Y')
+
 
             print_area = 'B3:H36'
 
@@ -96,11 +97,11 @@ def start_print():
             sheet.PageSetup.FitToPagesWide = 1
             sheet.PageSetup.PrintArea = print_area
 
-            if not os.path.exists('C:\\Users\\Admin\\Desktop\\Chetna_Plastic_Bills'):
-                os.mkdir('C:\\Users\\Admin\\Desktop\\Chetna_Plastic_Bills')
+            if not os.path.exists('C:\\Users\\hiren\\Desktop\\Chetna_Plastic_Bills'):
+                os.mkdir('C:\\Users\\hiren\\Desktop\\Chetna_Plastic_Bills')
 
             # Print the worksheet to PDF
-            pdf_file = f'C:\\Users\Admin\\Desktop\\Chetna_Plastic_Bills\\{custome_name} ({date_formatted}).pdf'
+            pdf_file = f'C:\\Users\hiren\\Desktop\\Chetna_Plastic_Bills\\{custome_name} ({date_formatted}).pdf'
             sheet.ExportAsFixedFormat(0, pdf_file)
 
             print(f"PDF saved as '{pdf_file}'")
@@ -152,7 +153,7 @@ def start_print():
 
 
 def clear_bill_folder():
-    folder_path = "C:\\Users\\Admin\\Desktop\\Chetna_Plastic_Bills"
+    folder_path = f"C:\\Users\hiren\\Desktop\\Chetna_Plastic_Bills"
 
     if os.path.exists(folder_path):
 
