@@ -97,11 +97,11 @@ def start_print():
             sheet.PageSetup.FitToPagesWide = 1
             sheet.PageSetup.PrintArea = print_area
 
-            if not os.path.exists('C:\\Users\\hiren\\Desktop\\Chetna_Plastic_Bills'):
-                os.mkdir('C:\\Users\\hiren\\Desktop\\Chetna_Plastic_Bills')
+            if not os.path.exists('Chetna_Plastic_Bills'):
+                os.mkdir('Chetna_Plastic_Bills')
 
             # Print the worksheet to PDF
-            pdf_file = f'C:\\Users\hiren\\Desktop\\Chetna_Plastic_Bills\\{custome_name} ({date_formatted}).pdf'
+            pdf_file = f'/Chetna_Plastic_Bills/{custome_name} ({date_formatted}).pdf'
             sheet.ExportAsFixedFormat(0, pdf_file)
 
             print(f"PDF saved as '{pdf_file}'")
@@ -153,7 +153,7 @@ def start_print():
 
 
 def clear_bill_folder():
-    folder_path = f"C:\\Users\hiren\\Desktop\\Chetna_Plastic_Bills"
+    folder_path = f"Chetna_Plastic_Bills"
 
     if os.path.exists(folder_path):
 
